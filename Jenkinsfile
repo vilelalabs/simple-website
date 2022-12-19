@@ -20,15 +20,15 @@ pipeline {
         }
         stage('Gera Container para Stagging') {
             steps {
-                // script {
-                //     def app = docker.build("simple-website:${env.BUILD_NUMBER}")
+                 script {
+                     def app = docker.build("simple-website:${env.BUILD_NUMBER}")
                 //     app.inside {
                 //         sh "npm install"
                 //         sh "npm run build"
                 //     }
-                // }
-                sh "docker build -t simple-website:${env.BUILD_NUMBER} ."
-                sh "docker run -d -p 3000:3000 simple-website:${env.BUILD_NUMBER}"
+                 }
+                //sh "docker build -t simple-website:${env.BUILD_NUMBER} ."
+                //sh "docker run -d -p 3000:3000 simple-website:${env.BUILD_NUMBER}"
             }
         }
         stage('Gera Container para Production') {
