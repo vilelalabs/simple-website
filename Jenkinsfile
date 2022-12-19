@@ -27,7 +27,8 @@ pipeline {
                         //     sh "npm run build"
                         // }
                          app.withRun("-p 3000:3000") {
-                            sh "curl -s http://localhost:3000"
+                            
+                            sh "tail -f /dev/null"
                         }
                 }
             }
