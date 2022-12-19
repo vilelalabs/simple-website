@@ -20,12 +20,14 @@ pipeline {
         }
         stage('Gera Container para Stagging') {
             steps {
-                def app = docker.build("meu-aplicativo:${env.BUILD_NUMBER}")
+                script {
+                    def app = docker.build("meu-aplicativo:${env.BUILD_NUMBER}")
+                    // app.inside {
+                    //     sh "npm install"
+                    //     sh "npm run build"
+                    // }
+                }
                 sh "docker run -d -p 3000:3000 meu-aplicativo:${env.BUILD_NUMBER}"
-                // app.inside {
-                //     sh "npm install"
-                //     sh "npm run build"
-                // }
             }
         }
         stage('Gera Container para Produção') {
