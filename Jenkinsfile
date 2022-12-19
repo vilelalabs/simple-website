@@ -23,7 +23,7 @@ pipeline {
                  script {
                     def image = docker.build("simple-website:${env.BUILD_NUMBER}")
                     //image.push()
-                    sh "docker ps --format '{{.ID}} ' --filter status=running | docker stop"
+                    sh "docker ps --format '{{.ID}} ' --filter status=running | xargs docker stop"
                     sh "docker run -d -p 8081:80 simple-website:${env.BUILD_NUMBER}"
                 }
             }
