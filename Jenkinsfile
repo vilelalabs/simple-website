@@ -23,8 +23,7 @@ pipeline {
                  script {
                     def image = docker.build("simple-website:${env.BUILD_NUMBER}")
                     
-                    def docker_status = sh(script: "docker ps
-                    --format '{{.ID}} ' --filter status=running", returnStdout: true)
+                    def docker_status = sh(script: "docker ps --format '{{.ID}} ' --filter status=running", returnStdout: true)
                     
                     if((docker_status)!= ''){
                         sh "docker ps --format '{{.ID}} ' --filter status=running | xargs docker stop"
