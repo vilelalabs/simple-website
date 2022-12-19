@@ -18,11 +18,10 @@ pipeline {
                 sh "npm run build"
             }
         }
-        stage('Generate Stagging Container') {
+        stage('Gen Stagging Container') {
             steps {
                  script {
                     def image = docker.build("simple-website:${env.BUILD_NUMBER}")
-                    
                     def docker_status = sh(script: "docker ps --format '{{.ID}} ' --filter status=running", returnStdout: true)
                     
                     if((docker_status)!= ''){
@@ -38,7 +37,7 @@ pipeline {
                 input message: 'Check website in http://host:8081. \n Deploy to Production?'
             }
         }
-        stage('Generate Production Container') {
+        stage('Gen Prod. Container') {
             steps {
                 sh "echo 'Gera Container para Produção'"
             }
