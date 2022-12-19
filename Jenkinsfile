@@ -30,7 +30,7 @@ pipeline {
         }
         stage('Gera Container para Produção') {
             steps {
-                
+                sh "echo 'Gera Container para Produção'"
             }
         }
     }
