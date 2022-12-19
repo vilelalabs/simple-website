@@ -23,13 +23,14 @@ pipeline {
                  script {
                     def image = docker.build("simple-website:${env.BUILD_NUMBER}")
                     //image.push()
-                   
+                    sh "docker stop $(docker ps -a -q --filter ancestor=simple-website:${env.BUILD_NUMBER} --format="{{.ID}}")"
                     sh "docker run -d -p 8081:80 simple-website:${env.BUILD_NUMBER}"
                 }
             }
         }
         stage('Waits for Manual Approval') {
             steps {
+                // sends slack message to manager in the channel jenkins
                 input message: 'Check website in http://host:8081. \n Deploy to Production?'
             }
         }
