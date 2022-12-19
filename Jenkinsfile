@@ -32,10 +32,10 @@ pipeline {
                 }
             }
         }
-        stage('Gera Container para Production') {
-            steps {
-                sh "echo 'Gera Container para Produção'"
-            }
-        }
+        // stage('Gera Container para Production') {
+        //     steps {
+        //         sh "echo 'Gera Container para Produção'"
+        //     }
+        // }
     }
 }
