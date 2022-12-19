@@ -1,12 +1,25 @@
-FROM node:lts-alpine
 
-WORKDIR /app
 
-COPY dist /app
+FROM httpd:2.4
 
-RUN npm install --production
+COPY dist /usr/local/apache2/htdocs
 
-# Expor a porta definida na aplicação
 EXPOSE 3000
 
-CMD ["npm", "start"]
+CMD ["httpd", "-D", "FOREGROUND"]
+
+
+
+
+# FROM node:lts-alpine
+
+# WORKDIR /app
+
+# COPY ./dist /app
+
+# RUN npm install --omit=dev
+
+# # Expor a porta definida na aplicação
+# EXPOSE 3000
+
+# CMD ["npm", "start"]
