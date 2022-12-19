@@ -6,10 +6,12 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "serve -s dist"
   },
   "dependencies": {
     "core-js": "^3.8.3",
+    "mini-css-extract-plugin": "^2.7.2",
     "vue": "^3.2.13"
   },
   "devDependencies": {
