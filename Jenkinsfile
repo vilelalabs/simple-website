@@ -23,9 +23,9 @@ pipeline {
                  script {
                     def image = docker.build("simple-website:${env.BUILD_NUMBER}")
                     //image.push()
-                    image.inside {
-                        sh "docker run -d -p 3000:3000 simple-website:${env.BUILD_NUMBER}"
-                    }
+                   
+                    sh "docker run -d -p 3000:3000 simple-website:${env.BUILD_NUMBER}"
+                    
 
 
 
