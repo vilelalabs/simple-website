@@ -10,7 +10,7 @@
             <ButtonDescription label="Git" description="Controle de versão" />
         </li>
         <li>
-            <ButtonDescription label="Docker" description="Containerização" />
+            <ButtonDescription label="Docker" description="Containerização de artefatos" />
         </li>
         <li>
             <ButtonDescription label="Slack" description="Mensagem instantânea" />
