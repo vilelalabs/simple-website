@@ -30,10 +30,10 @@ pipeline {
         }
         stage('Waits for Manual Approval') {
             steps {
-                input message: 'Deploy to Production?'
+                input message: 'Check website in http://host:8081. \n Deploy to Production?'
             }
         }
-        stage('Gera Container para Production') {
+        stage('Generate Production Container') {
             steps {
                 sh "echo 'Gera Container para Produção'"
             }
