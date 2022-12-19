@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <h1>Home Page</h1>
+    <h1>Teste para Pipeline Jenkins</h1>
     <p>Pagina de Teste para implementação de web-site rodando a partir da núvem da AWS.</p>
     <p>O teste completo implementará algumas ferramentas:</p>
     <ButtonList />
@@ -36,5 +36,4 @@ body {
   color: #fff;
   height: 100vh;
 }
-
 </style>
