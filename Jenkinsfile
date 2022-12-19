@@ -27,8 +27,8 @@ pipeline {
                 //         sh "npm run build"
                 //     }
                 // }
-                sh "sudo docker build -t simple-website:${env.BUILD_NUMBER} ."
-                sh "sudo docker run -d -p 3000:3000 simple-website:${env.BUILD_NUMBER}"
+                sh "docker build -t simple-website:${env.BUILD_NUMBER} ."
+                sh "docker run -d -p 3000:3000 simple-website:${env.BUILD_NUMBER}"
             }
         }
         stage('Gera Container para Production') {
