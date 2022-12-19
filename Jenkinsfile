@@ -22,13 +22,9 @@ pipeline {
             steps {
                  script {
                         def app = docker.build("simple-website:${env.BUILD_NUMBER}")
-                        // app.inside {
-                        //     sh "npm install"
-                        //     sh "npm run build"
-                        // }
-                         app.withRun("-p 3000:3000") {
-                            
-                            sh "tail -f /dev/null"
+                        app.inside {
+                            sh "npm install"
+                            sh "npm run build"
                         }
                 }
             }
