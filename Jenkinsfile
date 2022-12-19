@@ -26,8 +26,10 @@ pipeline {
                 //         sh "npm install"
                 //         sh "npm run build"
                 //     }
-                 }
-                //sh "docker build -t simple-website:${env.BUILD_NUMBER} ."
+                // run app detached
+                app.withRun("-p 3000:3000") {
+                    sh "curl -s http://localhost:3000"
+                }
                 //sh "docker run -d -p 3000:3000 simple-website:${env.BUILD_NUMBER}"
             }
         }
