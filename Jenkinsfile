@@ -21,8 +21,7 @@ pipeline {
         stage('Gen Stagging Container') {
             steps {
                  script {
-                    def jenkinsUrl = env.JENKINS_URL
-                    def baseUrl = jenkinsUrl.split(':')[0]
+                   
                     def staggingPort = 8081
                     def image = docker.build("simple-website:${env.BUILD_NUMBER}")
                     def docker_status = sh(script: "docker ps --format '{{.ID}} ' --filter status=running", returnStdout: true)
@@ -36,8 +35,12 @@ pipeline {
         }
         stage('Waits for Manual Approval') {
             steps {
+                script{
+                    def jenkinsUrl = env.JENKINS_URL
+                    def baseUrl = jenkinsUrl.split(':')[0]
                     slackSend (channel: '#jenkins', color: 'warning', message: "Aguardando aprovação de ${baseUrl}:${staggingPort} no Jenkins!")
                     input message: "Check website in http:${baseUrl}//:${staggingPort}. \n Deploy to Production?"
+                }
             }
         }
         stage('Gen Prod. Container') {
