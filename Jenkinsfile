@@ -36,9 +36,9 @@ pipeline {
         stage('Waits for Manual Approval') {
             steps {
                 script{
-                    def jenkinsUrl = env.JENKINS_URL
-                    def baseUrl = jenkinsUrl.split(':')[0]
-                    slackSend (channel: '#jenkins', color: 'warning', message: "Aguardando aprovação de ${baseUrl}:${staggingPort} no Jenkins!")
+                    // def jenkinsUrl = env.JENKINS_URL
+                    // def baseUrl = jenkinsUrl.split(':')[0]
+                    // slackSend (channel: '#jenkins', color: 'warning', message: "Aguardando aprovação de ${baseUrl}:${staggingPort} no Jenkins!")
                     input message: "Check website in http:${baseUrl}//:${staggingPort}. \n Deploy to Production?"
                 }
             }
