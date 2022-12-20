@@ -27,8 +27,6 @@ pipeline {
         stage('Gen Stagging Container') {
             steps {
                  script {
-                   
-                    def staggingPort = 8081
                     def image = docker.build("simple-website:${env.BUILD_NUMBER}")
                     def docker_status = sh(script: "docker ps --format '{{.ID}} ' --filter status=running", returnStdout: true)
                     
@@ -51,7 +49,7 @@ pipeline {
                         //message: "Aguardando aprovação de ${baseUrl}:${staggingPort} no Jenkins!"
                         )
 
-                    input message: 'Check website. \n Deploy to Production?'
+                    input message: 'Deploy to Production?'
                 }
             }
         }
