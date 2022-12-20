@@ -20,17 +20,18 @@ pipeline {
         }
         stage('Gen Stagging Container') {
             steps {
-                 script {
+                sh "echo 'Gera Container para Stagging'"
+                //  script {
                    
-                    def staggingPort = 8081
-                    def image = docker.build("simple-website:${env.BUILD_NUMBER}")
-                    def docker_status = sh(script: "docker ps --format '{{.ID}} ' --filter status=running", returnStdout: true)
+                //     def staggingPort = 8081
+                //     def image = docker.build("simple-website:${env.BUILD_NUMBER}")
+                //     def docker_status = sh(script: "docker ps --format '{{.ID}} ' --filter status=running", returnStdout: true)
                     
-                    if((docker_status)!= ''){
-                        sh "docker ps --format '{{.ID}} ' --filter status=running | xargs docker stop"
-                    }
-                    sh "docker run -d -p ${staggingPort}:80 simple-website:${env.BUILD_NUMBER}"
-                }
+                //     if((docker_status)!= ''){
+                //         sh "docker ps --format '{{.ID}} ' --filter status=running | xargs docker stop"
+                //     }
+                //     sh "docker run -d -p ${staggingPort}:80 simple-website:${env.BUILD_NUMBER}"
+                // }
             }
         }
         stage('Waits for Manual Approval'){
@@ -41,7 +42,7 @@ pipeline {
                     slackSend (
                         channel: '#jenkins',
                         color: 'warning',
-                        message: "Build ${env.BUILD_NUMBER} waiting for approval in Jenkins!"
+                        message: "Build ${env.BUILD_NUMBER} waiting for approval in Jenkins! Access ${env.JENKINS_URL}."
                         //message: "Aguardando aprovação de ${baseUrl}:${staggingPort} no Jenkins!"
                         )
 
