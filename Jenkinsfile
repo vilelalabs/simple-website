@@ -1,12 +1,13 @@
 pipeline {
     agent any
 
-    stages {
-        // porta para saída so site em Stagging
-        def staggingPort = 8081
-        // URL da máquina de processos de Desenvolvimento
-        def baseUrl = "${env.JENKINS_URL}".split(':')[0]
+    // porta para saída so site em Stagging
+    def staggingPort = 8081
+    // URL da máquina de processos de Desenvolvimento
+    def baseUrl = "${env.JENKINS_URL}".split(':')[0]
 
+
+    stages {
         stage('Retrieve Code') {
             steps {
                 git "https://github.com/vilelalabs/simple-website.git"
