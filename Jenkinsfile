@@ -1,9 +1,9 @@
 pipeline {
     // porta para saída so site em Stagging
-    def staggingPort = (8081)
-    def globalVariable = "Hello, world!"
+    //def staggingPort = (8081)
+    
     // URL da máquina de processos de Desenvolvimento
-    def baseUrl = ("${env.JENKINS_URL}".split(':')[0])
+    //def baseUrl = ("${env.JENKINS_URL}".split(':')[0])
 
     agent any
 
