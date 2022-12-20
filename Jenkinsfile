@@ -37,18 +37,15 @@ pipeline {
         stage('Waits for Manual Approval') {
             steps {
                 // sends slack message to manager in the channel jenkins
-                script{
-                    slackSend channel: '#jenkins', color: 'warning', message: "Check website in http:${baseUrl}//:${staggingPort}. \n Deploy to Production?(YES or NO)?", responseUrlVar: 'responseUrl'
+                script {
+                    slackSend color: 'warning', message: 'Please approve this build', responseUrlVar: 'responseUrl'
                     def response = slackReceive responseUrl: responseUrl
-                    if(response.text == 'YES'){
-                        echo "Deploying to Production..."
+                    if (response.text == 'approve') {
+                        echo 'Approved!'
                     } else {
-                        echo "Aborting..."
-                        currentBuild.result = 'ABORTED'
-                        error('Aborted')
+                        echo 'Rejected!'
                     }
                 }
-
                 //input message: "Check website in http:${baseUrl}//:${staggingPort}. \n Deploy to Production?"
             }
         }
