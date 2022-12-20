@@ -20,25 +20,23 @@ pipeline {
         }
         stage('Build') {
             steps {
-                echo "Building"
-                // sh "npm install"
-                // sh "npm run build"
+                sh "npm install"
+                sh "npm run build"
             }
         }
         stage('Gen Stagging Container') {
             steps {
-                sh "echo 'Gera Container para Stagging'"
-                //  script {
+                 script {
                    
-                //     def staggingPort = 8081
-                //     def image = docker.build("simple-website:${env.BUILD_NUMBER}")
-                //     def docker_status = sh(script: "docker ps --format '{{.ID}} ' --filter status=running", returnStdout: true)
+                    def staggingPort = 8081
+                    def image = docker.build("simple-website:${env.BUILD_NUMBER}")
+                    def docker_status = sh(script: "docker ps --format '{{.ID}} ' --filter status=running", returnStdout: true)
                     
-                //     if((docker_status)!= ''){
-                //         sh "docker ps --format '{{.ID}} ' --filter status=running | xargs docker stop"
-                //     }
-                //     sh "docker run -d -p ${staggingPort}:80 simple-website:${env.BUILD_NUMBER}"
-                // }
+                    if((docker_status)!= ''){
+                        sh "docker ps --format '{{.ID}} ' --filter status=running | xargs docker stop"
+                    }
+                    sh "docker run -d -p ${staggingPort}:80 simple-website:${env.BUILD_NUMBER}"
+                }
             }
         }
         stage('Waits for Manual Approval'){
@@ -47,7 +45,9 @@ pipeline {
                     slackSend (
                         channel: '#jenkins',
                         color: 'warning',
-                        message: "Build [${env.BUILD_NUMBER}] aguardando Aprovação no Jenkins.\n\n Verifique a aplicação rodando em http://${baseUrl}:${staggingPort}\n\n e aprove acessando: ${env.JENKINS_URL}/blue/organizations/jenkins/${JOB_NAME}/detail/${JOB_NAME}/${env.BUILD_NUMBER}/pipeline "
+                        message: "Build [${env.BUILD_NUMBER}] aguardando Aprovação no Jenkins.\n\n \
+                        Verifique a aplicação rodando em http:${baseUrl}:${staggingPort}/\n\n Aprove(ou não) \
+                        acessando: ${env.JENKINS_URL}blue/organizations/jenkins/${JOB_NAME}/detail/${JOB_NAME}/${env.BUILD_NUMBER}/pipeline "
                         //message: "Aguardando aprovação de ${baseUrl}:${staggingPort} no Jenkins!"
                         )
 
