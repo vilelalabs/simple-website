@@ -38,9 +38,8 @@ pipeline {
             steps {
                 // sends slack message to manager in the channel jenkins
                 script {
-                    slackSend color: 'warning', message: 'Please approve this build', responseUrlVar: 'responseUrl'
-                    def response = slackReceive responseUrl: responseUrl
-                    if (response.text == 'approve') {
+                    def slackResponse =  slackSend (channel: '#jenkins', color: 'warning', message: "Aguardando aprovação em ${baseUrl}:${staggingPort}")
+                    if (slackResponse.text == 'approve') {
                         echo 'Approved!'
                     } else {
                         echo 'Rejected!'
