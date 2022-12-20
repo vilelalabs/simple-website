@@ -1,10 +1,10 @@
-pipeline {
     // porta para saída so site em Stagging
-    //def staggingPort = (8081)
-    
+    def staggingPort = (8081)
     // URL da máquina de processos de Desenvolvimento
-    //def baseUrl = ("${env.JENKINS_URL}".split(':')[0])
+    def baseUrl = ("${env.JENKINS_URL}".split(':')[1])
 
+
+pipeline {
     agent any
 
     stages {
@@ -47,7 +47,7 @@ pipeline {
                     slackSend (
                         channel: '#jenkins',
                         color: 'warning',
-                        message: "Build ${env.BUILD_NUMBER} aguardando Aprovação no Jenkins.\n Verifique a aplicação rodando em ${baseUrl}:${staggingPort}\n e aprove acessando: ${env.JENKINS_URL}/blue/organizations/jenkins/${JOB_NAME}/detail/${JOB_NAME}/${env.BUILD_NUMBER}/pipeline "
+                        message: "Build [${env.BUILD_NUMBER}] aguardando Aprovação no Jenkins.\n\n Verifique a aplicação rodando em http://${baseUrl}:${staggingPort}\n\n e aprove acessando: ${env.JENKINS_URL}/blue/organizations/jenkins/${JOB_NAME}/detail/${JOB_NAME}/${env.BUILD_NUMBER}/pipeline "
                         //message: "Aguardando aprovação de ${baseUrl}:${staggingPort} no Jenkins!"
                         )
 
