@@ -14,8 +14,9 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh "npm install"
-                sh "npm run build"
+                echo "Building"
+                // sh "npm install"
+                // sh "npm run build"
             }
         }
         stage('Gen Stagging Container') {
@@ -42,11 +43,11 @@ pipeline {
                     slackSend (
                         channel: '#jenkins',
                         color: 'warning',
-                        message: "Build ${env.BUILD_NUMBER} waiting for approval in Jenkins! Access ${env.JENKINS_URL}."
+                        message: "Build ${env.BUILD_NUMBER} waiting for approval in Jenkins! Access ${env.JENKINS_URL}/blue/organizations/jenkins/${JOB_NAME}/detail/${JOB_NAME}/ ${env.BUILD_NUMBER}/pipeline."
                         //message: "Aguardando aprovação de ${baseUrl}:${staggingPort} no Jenkins!"
                         )
 
-                    input message: 'Check website in http:${baseUrl}//:${staggingPort}. \n Deploy to Production?'
+                    input message: 'Check website. \n Deploy to Production?'
                 }
             }
         }
